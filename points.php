@@ -10,5 +10,19 @@ header('Access-Control-Allow-Credentials: true');
 
 header('Access-Control-Allow-Headers: Authorization, Origin, X-Requested-With, Accept, X-PINGOTHER, Content-Type');
 
-$jsonpoints = file_get_contents('points.json');
-echo $jsonpoints;
+if (isset($_GET['x']) && isset($_GET['y'])) {
+  $x = $_GET['x'];
+  $jsonpoints = file_get_contents('points.json');
+  $jsonpointsarray = json_decode($jsonpoints, true);
+  $newPoint = [
+        'x' => $x,
+        'y' => $y,
+        'color' => 'black',
+   ];
+  $jsonpointsarray[] = $newPoint;
+  $pointsjson = json_encode($jsonpointsarray);
+  file_put_contents('points.json', $pointsjson);
+
+} else {
+  error_log("NO X any Y");
+}
