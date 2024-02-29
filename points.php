@@ -12,6 +12,7 @@ header('Access-Control-Allow-Headers: Authorization, Origin, X-Requested-With, A
 
 if (isset($_GET['x']) && isset($_GET['y'])) {
   $x = $_GET['x'];
+  $y = $_GET['y'];
   $jsonpoints = file_get_contents('points.json');
   $jsonpointsarray = json_decode($jsonpoints, true);
   $newPoint = [
