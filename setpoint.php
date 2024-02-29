@@ -22,6 +22,6 @@ $array = [
 $array_json = file_get_contents("points.json");
 $array_decode_json = json_decode($array_json, true);
 $array_decode_json[] = $array;
-file_put_contents(json_encode($array_decode_json));
+file_put_contents('points.json', json_encode($array_decode_json));
 
 ?>
