@@ -1,29 +1,19 @@
 <?php
 
-// Шапка
-
+// Разрешим принимать и отправлять запросы на сервер
 header('Access-Control-Allow-Origin: *');
 
+// Установим типы запросов, которые следует разрешить (все неуказанные будут отклоняться)
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 
+// Разрешим передавать Cookie и Authorization заголовки для указанного в Origin домена
 header('Access-Control-Allow-Credentials: true');
 
+// Установим заголовки, которые можно будет обрабатывать
 header('Access-Control-Allow-Headers: Authorization, Origin, X-Requested-With, Accept, X-PINGOTHER, Content-Type');
 
-if (isset($_GET['x']) && isset($_GET['y'])) {
-  $x = $_GET['x'];
-  $y = $_GET['y'];
-  $jsonpoints = file_get_contents('points.json');
-  $jsonpointsarray = json_decode($jsonpoints, true);
-  $newPoint = [
-        'x' => $x,
-        'y' => $y,
-        'color' => 'black',
-   ];
-  $jsonpointsarray[] = $newPoint;
-  $pointsjson = json_encode($jsonpointsarray);
-  file_put_contents('points.json', $pointsjson);
+// Получаем информацию из файла points.json
+$pointsJson = file_get_contents('points.json');
 
-} else {
-  error_log("NO X any Y");
-}
+// Выводим информацию из файла в поток
+echo $pointsJson;
